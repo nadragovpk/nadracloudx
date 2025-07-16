@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting...</title>
+  <script>
+    // Run on page load
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      const url = params.get("url");
+
+      // Basic validation
+      if (url && url.startsWith("http")) {
+        window.location.href = url;
+      } else {
+        document.body.innerHTML = "<h2>⚠️ Invalid or missing URL</h2>";
+      }
+    };
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
