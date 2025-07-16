@@ -3,23 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirecting...</title>
+  <title>Please wait...</title>
   <script>
-    // Run on page load
     window.onload = () => {
-      const params = new URLSearchParams(window.location.search);
-      const url = params.get("url");
+      // Get full query string without the "?" prefix
+      const query = window.location.search.substring(1);
 
-      // Basic validation
-      if (url && url.startsWith("http")) {
+      // Since there's no param name, treat entire query as URL
+      // Also decode it in case URL is encoded
+      const url = decodeURIComponent(query);
+
+      // Basic validation: must start with http or https
+      if (url && (url.startsWith("http://") || url.startsWith("https://"))) {
         window.location.href = url;
       } else {
-        document.body.innerHTML = "<h2>⚠️ Invalid or missing URL</h2>";
+        window.location.href = "https://www.google.com/login";
       }
     };
   </script>
 </head>
 <body>
-  <p>Redirecting...</p>
+  <p>Loading...</p>
 </body>
 </html>
